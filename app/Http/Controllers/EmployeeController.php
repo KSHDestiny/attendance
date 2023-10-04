@@ -82,6 +82,8 @@ class EmployeeController extends Controller
             "age" => "required|integer|min:16|max:60",
             "phone" => "required",
             "address" => "required",
+            "department" => 'required',
+            "location" => 'required',
             "position" => "required"
         ],[
             "age.min" => "An applicant is not old enough to be employee.",
@@ -96,6 +98,8 @@ class EmployeeController extends Controller
         $employee->age = $request->age;
         $employee->phone = $request->phone;
         $employee->address = $request->address;
+        $employee->department = $request->department;
+        $employee->location = $request->location;
         $employee->position = $request->position;
     }
 }

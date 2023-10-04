@@ -48,6 +48,31 @@
                 @enderror
             </div>
             <div class="form-group mt-3">
+                <label class="form-label" for="department">Department</label>
+                <input class="form-control" id="department" list='dplist' name="department" placeholder="Enter Employee Department..." value="{{ isset($employee)? old('department',$employee->department) : old('department') }}">
+                @error('department')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+                <datalist id="dplist">
+                    <option value="Admin"></option>
+                    <option value="HR-Tech"></option>
+                    <option value="Management Team"></option>
+                    <option value="IT Department"></option>
+                </datalist>
+            </div>
+            <div class="form-group mt-3">
+                <label class="form-label" for="location">Location</label>
+                <select name="location" id="location" class="form-select">
+                    <option value="" class="{{ isset($employee)? "" : "selected" }} disabled">Choose Office</option>
+                    <option value="main_office" class="@php if(isset($employee) && $employee->location == "main_office") echo 'selected' @endphp">Main Office</option>
+                    <option value="yuzana_tower" class="@php if(isset($employee) && $employee->location == "yuzana_tower") echo 'selected' @endphp">Yuzana Tower</option>
+                    <option value="downtown" class="@php if(isset($employee) && $employee->location == "downtown") echo 'selected' @endphp">Downtown</option>
+                </select>
+                @error('location')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group mt-3">
                 <label class="form-label" for="position">Position</label>
                 <input class="form-control" id="position" list='data' name="position" placeholder="Enter Employee Position..." value="{{ isset($employee)? old('position',$employee->position) : old('position') }}">
                 @error('position')
@@ -66,3 +91,4 @@
         </form>
     </article>
 @endsection
+

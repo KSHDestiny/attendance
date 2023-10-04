@@ -17,6 +17,8 @@
                     <th>Age</th>
                     <th>Phone</th>
                     <th>Address</th>
+                    <th>Department</th>
+                    <th>Location</th>
                     <th>Position</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -31,6 +33,8 @@
                         <td>{{ $employee->age }}</td>
                         <td>{{ $employee->phone }}</td>
                         <td>{{ $employee->address }}</td>
+                        <td>{{ $employee->department }}</td>
+                        <td>{{ $employee->location }}</td>
                         <td>{{ $employee->position }}</td>
                         <td>
                             <a href="{{ route('employee.edit',$employee->id) }}" class="btn btn-warning">Edit</a>

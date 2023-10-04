@@ -50,6 +50,16 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Today Attendance <span class="d-none d-md-inline">|</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Details <span class="d-none d-md-inline">|</span>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -76,7 +86,7 @@
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <div>{{ __('Dashboard') }}</div>

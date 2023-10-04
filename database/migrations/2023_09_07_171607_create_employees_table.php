@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('age');
             $table->string('phone');
             $table->longText('address');
+            $table->string('department');
+            $table->string('location');
             $table->string('position');
             $table->timestamps();
         });

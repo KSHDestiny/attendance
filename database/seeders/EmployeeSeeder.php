@@ -16,6 +16,8 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
+        $location = ["main_office","yuzana_tower","downtown"];
+
         $json = File::get(public_path()."/data/employees.json");
         $data = json_decode($json);
         foreach($data as $item){
@@ -26,6 +28,8 @@ class EmployeeSeeder extends Seeder
                 'age' => $item->age,
                 'phone' => $item->phone,
                 'address' => $item->address,
+                'department' => "IT Department",
+                'location' =>fake()->randomElement($location),
                 'position' => $item->position,
                 'created_at' => Carbon::now()
             ]);

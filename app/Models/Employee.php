@@ -9,9 +9,13 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','user_id','email','age','phone','address','position'];
+    protected $fillable = ['name','user_id','email','age','phone','address','department','location','position'];
 
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
+    }
+
+    public function getLocationAttribute($value){
+        return ucwords(str_replace("_"," ",$value));
     }
 }
