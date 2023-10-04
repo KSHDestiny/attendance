@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
@@ -25,3 +26,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/employee',EmployeeController::class)->middleware('auth');
+
+Route::middleware('auth')->group(function(){
+    Route::get('/attendance',[AttendanceController::class,"attendance"])->name('attendance');
+    Route::post('/attendance/create',[AttendanceController::class,"createAll"])->name('attendance.create');
+    Route::post('/attendance/delete',[AttendanceController::class,"deleteAll"])->name('attendance.delete');
+});

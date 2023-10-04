@@ -75,7 +75,8 @@ class EmployeeController extends Controller
         ]);
     }
 
-    private function dataValidation($request, $id){
+    private function dataValidation($request, $id)
+    {
         $request->validate([
             "name" => "required|max:50",
             "email"=> "required|email|unique:employees,email,{$id}",
@@ -83,7 +84,7 @@ class EmployeeController extends Controller
             "phone" => "required",
             "address" => "required",
             "department" => 'required',
-            "location" => 'required',
+            "location" => 'required|in:main_office,yuzana_tower,downtown',
             "position" => "required"
         ],[
             "age.min" => "An applicant is not old enough to be employee.",
@@ -91,7 +92,8 @@ class EmployeeController extends Controller
         ]);
     }
 
-    private function dataInserting($employee, $request){
+    private function dataInserting($employee, $request)
+    {
         $employee->user_id = auth()->user()->id;
         $employee->name = $request->name;
         $employee->email = $request->email;

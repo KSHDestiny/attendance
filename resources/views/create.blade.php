@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@isset($employee)
+    @section('title',"Edit Employee")
+@else
+    @section('title',"Create Employee")
+@endisset
+
 @section('CR')
     <a href="{{ route('employee.index') }}" class="text-decoration-none text-primary">Back</a>
 @endsection

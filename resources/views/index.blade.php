@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title',"Dashboard")
+
 @section('CR')
     <a href="{{ route('employee.create') }}" class="text-decoration-none">Create One +</a>
 @endsection

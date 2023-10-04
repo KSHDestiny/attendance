@@ -15,6 +15,10 @@ class Employee extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
+    public function employees(){
+        return $this->hasMany(Attendance::class);
+    }
+
     public function getLocationAttribute($value){
         return ucwords(str_replace("_"," ",$value));
     }

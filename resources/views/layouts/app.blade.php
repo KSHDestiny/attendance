@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -51,7 +51,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a class="nav-link" href="{{ route('attendance') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Today Attendance <span class="d-none d-md-inline">|</span>
                                 </a>
                             </li>
