@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "name": "Kaung Sat Hein",
+        "email": "kaungsathein@gmail.com",
+        "age": 24,
+        "phone": "09123456789",
+        "address": "Yangon",
+        "position": "Mid Developer"
+    },
+    {
+        "id": 2,
+        "name": "Mo Mo",
+        "email": "momo@gmail.com",
+        "age": 22,
+        "phone": "0987654321",
+        "address": "Madalay",
+        "position": "Junior Developer"
+    },
+    {
+        "id": 3,
+        "name": "Aung Aung",
+        "email": "aungaung@gmail.com",
+        "age": 32,
+        "phone": "0966554433",
+        "address": "Yangon",
+        "position": "Team Lead"
+    },
+    {
+        "id": 4,
+        "name": "Kyaw Kyaw",
+        "email": "kyawkyaw@gmail.com",
+        "age": 27,
+        "phone": "09123456543",
+        "address": "Yangon",
+        "position": "Senior Developer"
+    },
+    {
+        "id": 5,
+        "name": "Hla Hla",
+        "email": "hlahla@gmail.com",
+        "age": 22,
+        "phone": "09876543721",
+        "address": "Madalay",
+        "position": "Junior Developer"
+    },
+    {
+        "id": 6,
+        "name": "Mya Mya",
+        "email": "myamya@gmail.com",
+        "age": 26,
+        "phone": "0912344439",
+        "address": "Yangon",
+        "position": "Mid Developer"
+    },
+    {
+        "id": 7,
+        "name": "Moe Moe",
+        "email": "moemoe@gmail.com",
+        "age": 21,
+        "phone": "09876541121",
+        "address": "Pyay",
+        "position": "Junior Developer"
+    },
+    {
+        "id": 8,
+        "name": "Pyae Pyae",
+        "email": "pyaepyae@gmail.com",
+        "age": 32,
+        "phone": "09665542233",
+        "address": "Yangon",
+        "position": "Senior Developer"
+    },
+    {
+        "id": 9,
+        "name": "Tun Tun",
+        "email": "tuntun@gmail.com",
+        "age": 27,
+        "phone": "091234116543",
+        "address": "Yangon",
+        "position": "Senior Developer"
+    },
+    {
+        "id": 10,
+        "name": "Min Min",
+        "email": "minmin@gmail.com",
+        "age": 22,
+        "phone": "098996543721",
+        "address": "Madalay",
+        "position": "Junior Developer"
+    }
+]
