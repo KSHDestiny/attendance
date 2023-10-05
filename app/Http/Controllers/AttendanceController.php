@@ -55,7 +55,8 @@ class AttendanceController extends Controller
         }
     }
 
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
         $this->attendanceValidate($request);
 
         if(auth()->id() != $request->id){
@@ -80,7 +81,8 @@ class AttendanceController extends Controller
         return redirect()->route('attendance');
     }
 
-    public function search(){
+    public function search()
+    {
         $attendances = Attendance::where('attendances.user_id',auth()->id())
                 ->select('employees.name','employees.department','employees.location','employees.position','attendances.*')
                 ->join('employees','attendances.employee_id','employees.id')
@@ -102,7 +104,8 @@ class AttendanceController extends Controller
         ]);
     }
 
-    private function attendanceValidate($request){
+    private function attendanceValidate($request)
+    {
         $request->validate([
             'name' => 'required',
             'id' => 'required',
@@ -112,5 +115,4 @@ class AttendanceController extends Controller
             'finish' => "date_format:H:i|after:start",
         ]);
     }
-
 }
