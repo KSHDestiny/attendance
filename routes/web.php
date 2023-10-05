@@ -4,6 +4,7 @@ use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\OverViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,6 @@ Route::middleware('auth')->group(function(){
     Route::post('/attendance/delete',[AttendanceController::class,"deleteAll"])->name('attendance.delete');
     Route::post('/attendance/edit',[AttendanceController::class,"edit"])->name('attendance.edit');
     Route::post('/attendance/search',[AttendanceController::class,"search"])->name('attendance.search');
+
+    Route::get('/overview',[OverViewController::class,'index'])->name('overview');
 });

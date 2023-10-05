@@ -182,21 +182,11 @@
 
                         let data = "";
                         attendances.forEach(attendance => {
-
-                            let location = "";
-                            if(attendance.location == "main_office"){
-                                location = "Main Office";
-                            } else if (attendance.location == "yuzana_tower"){
-                                location = "Yuzana Tower";
-                            } else {
-                                location = "Downtown";
-                            }
-
                             data += `
                             <tr>
                                 <td>${attendance.name}</td>
                                 <td class="d-none d-md-table-cell">${attendance.department}</td>
-                                <td class="d-none d-md-table-cell">${location}</td>
+                                <td class="d-none d-md-table-cell text-capitalize">${attendance.location.replace('_',' ')}</td>
                                 <td class="d-none d-md-table-cell">${attendance.position}</td>
                             </tr>
                             `;

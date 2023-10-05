@@ -60,8 +60,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Details <span class="d-none d-md-inline">|</span>
+                                <a class="nav-link" href="{{ route('overview') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Overview <span class="d-none d-md-inline">|</span>
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
@@ -120,6 +120,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     {!! Toastr::message() !!}
 
     <script>

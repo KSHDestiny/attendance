@@ -34,5 +34,6 @@ class EmployeeSeeder extends Seeder
                 'created_at' => Carbon::now()
             ]);
         }
+
     }
 }

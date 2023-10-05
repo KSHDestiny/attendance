@@ -29,7 +29,7 @@
             <tbody>
                 @forelse ($employees as $employee)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ ++$i }}</td>
                         <td>{{ $employee->name }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->age }}</td>
@@ -51,6 +51,8 @@
             </tbody>
         </table>
     </article>
+
+    {{ $employees->links('pagination::bootstrap-5') }}
 
 @endsection
 

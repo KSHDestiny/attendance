@@ -59,7 +59,9 @@ class AttendanceController extends Controller
     {
         $this->attendanceValidate($request);
 
-        if(auth()->id() != $request->id){
+        // ! Authorized User
+        $authorizedUser = Attendance::select('user_id')->where('id',$request->id)->first()->user_id;
+        if(auth()->id() != $authorizedUser){
             Toastr::error("403 Forbitten, You are not an authorized user.", "Error Message", ["closeButton" => true, "progressBar" => true, "positionClass" => "toast-bottom-right"]);
             return back();
         }

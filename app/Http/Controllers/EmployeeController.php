@@ -17,8 +17,8 @@ class EmployeeController extends Controller
 
     public function index()
     {
-        $employees = Employee::where('user_id',auth()->user()->id)->get();
-        return view("index",compact("employees"));
+        $employees = Employee::where('user_id',auth()->user()->id)->paginate(15);
+        return view("index",compact("employees"))->with('i', (request()->input('page',1) - 1) * 15);;
     }
 
     public function create()
