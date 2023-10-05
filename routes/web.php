@@ -36,4 +36,6 @@ Route::middleware('auth')->group(function(){
     Route::post('/attendance/search',[AttendanceController::class,"search"])->name('attendance.search');
 
     Route::get('/overview',[OverViewController::class,'index'])->name('overview');
+    Route::get('/overall',[OverViewController::class,'overall'])->name('overall');
+    Route::post('/overall',[OverViewController::class,'overallData'])->name('overall.data');
 });

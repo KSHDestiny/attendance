@@ -61,7 +61,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('overview') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Overview <span class="d-none d-md-inline">|</span>
+                                    Today Overview <span class="d-none d-md-inline">|</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('overall') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Overall <span class="d-none d-md-inline">|</span>
                                 </a>
                             </li>
                             <li class="nav-item dropdown">

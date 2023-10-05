@@ -88,6 +88,7 @@ class AttendanceController extends Controller
         $attendances = Attendance::where('attendances.user_id',auth()->id())
                 ->select('employees.name','employees.department','employees.location','employees.position','attendances.*')
                 ->join('employees','attendances.employee_id','employees.id')
+                ->whereDate('date', Carbon::today())
                 ->when(request('department'), function ($query){
                     $department = request('department');
                     $query->where('employees.department','like','%'.$department.'%');
