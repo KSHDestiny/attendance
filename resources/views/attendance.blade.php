@@ -281,6 +281,7 @@
                     } else {
                         $('#attendanceData').html("");
                         $("#attendanceStatus").html("");
+                        $("#emptyData").remove();
 
                         let data = `<h1 id="emptyData" class="text-center display-3 mt-5 text-danger">There is no data!</h1>`;
                         $("#tableField").append(data);
