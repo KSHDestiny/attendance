@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained('employees')->onUpdate('cascade')->onDelete('cascade');
             $table->enum('status',['On time','Absent','Late'])->default('On time');
             $table->time('start')->default('08:00:00');
-            $table->time('break')->default('01:00:00');
+            $table->time('break')->default('00:00:00');
             $table->time('finish')->default('17:00:00');
             $table->timestamp('date')->useCurrent();
             $table->timestamps();

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Employee;
 use App\Models\Attendance;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
@@ -53,4 +54,63 @@ class AttendanceController extends Controller
             return back();
         }
     }
+
+    public function edit(Request $request){
+        $this->attendanceValidate($request);
+
+        if(auth()->id() != $request->id){
+            Toastr::error("403 Forbitten, You are not an authorized user.", "Error Message", ["closeButton" => true, "progressBar" => true, "positionClass" => "toast-bottom-right"]);
+            return back();
+        }
+
+        $attendance = Attendance::find($request->id);
+        $attendance->status = $request->status;
+        IF($request->status == "Absent"){
+            $attendance->start = "00:00";
+            $attendance->break = "00:00";
+            $attendance->finish = "00:00";
+        }else{
+            $attendance->start = $request->start;
+            $attendance->break = $request->break?? "00:00";
+            $attendance->finish = $request->finish;
+        }
+        $attendance->save();
+
+        Toastr::success("You have edited {$request->name} data!", "Success Message", ["closeButton" => true, "progressBar" => true, "positionClass" => "toast-bottom-right"]);
+        return redirect()->route('attendance');
+    }
+
+    public function search(){
+        $attendances = Attendance::where('attendances.user_id',auth()->id())
+                ->select('employees.name','employees.department','employees.location','employees.position','attendances.*')
+                ->join('employees','attendances.employee_id','employees.id')
+                ->when(request('department'), function ($query){
+                    $department = request('department');
+                    $query->where('employees.department','like','%'.$department.'%');
+                })
+                ->when(request('position'), function ($query){
+                    $position = request('position');
+                    $query->where('employees.position','like','%'.$position.'%');
+                })
+                ->when(request('name'), function ($query){
+                    $name = request('name');
+                    $query->where('employees.name','like','%'.$name.'%');
+                })->get();
+
+        return response()->json([
+            'attendances' => $attendances
+        ]);
+    }
+
+    private function attendanceValidate($request){
+        $request->validate([
+            'name' => 'required',
+            'id' => 'required',
+            'status' => "required",
+            'start' => "date_format:H:i|before:finish",
+            'break' => "date_format:H:i|nullable",
+            'finish' => "date_format:H:i|after:start",
+        ]);
+    }
+
 }

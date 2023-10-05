@@ -31,4 +31,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/attendance',[AttendanceController::class,"attendance"])->name('attendance');
     Route::post('/attendance/create',[AttendanceController::class,"createAll"])->name('attendance.create');
     Route::post('/attendance/delete',[AttendanceController::class,"deleteAll"])->name('attendance.delete');
+    Route::post('/attendance/edit',[AttendanceController::class,"edit"])->name('attendance.edit');
+    Route::post('/attendance/search',[AttendanceController::class,"search"])->name('attendance.search');
 });

@@ -43,7 +43,6 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         filterEmployee(auth()->user()->id, $employee->user_id, null);
-
         return view("create",compact("employee"));
     }
 

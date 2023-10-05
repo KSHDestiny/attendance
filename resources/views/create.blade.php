@@ -69,10 +69,10 @@
             <div class="form-group mt-3">
                 <label class="form-label" for="location">Location</label>
                 <select name="location" id="location" class="form-select">
-                    <option value="" class="{{ isset($employee)? "" : "selected" }} disabled">Choose Office</option>
-                    <option value="main_office" class="@php if(isset($employee) && $employee->location == "main_office") echo 'selected' @endphp">Main Office</option>
-                    <option value="yuzana_tower" class="@php if(isset($employee) && $employee->location == "yuzana_tower") echo 'selected' @endphp">Yuzana Tower</option>
-                    <option value="downtown" class="@php if(isset($employee) && $employee->location == "downtown") echo 'selected' @endphp">Downtown</option>
+                    <option value="" @if(empty($employee)) selected @endif disabled>Choose Office</option>
+                    <option value="main_office" @if(isset($employee) && $employee->location == "Main Office") selected @endif>Main Office</option>
+                    <option value="yuzana_tower" @if(isset($employee) && $employee->location == "Yuzana Tower") selected @endif>Yuzana Tower</option>
+                    <option value="downtown" @if(isset($employee) && $employee->location == "Downtown") selected @endif>Downtown</option>
                 </select>
                 @error('location')
                     <p class="text-danger">{{ $message }}</p>
@@ -97,4 +97,3 @@
         </form>
     </article>
 @endsection
-
