@@ -49,8 +49,8 @@ class OverViewController extends Controller
 
     public function overall()
     {
-        $attendees = Attendance::select('employee_id','status')->where('user_id',auth()->id())->get();
-        return view('overall',compact('attendees'));
+        $employees = Employee::select('name')->where('user_id',auth()->id())->get();
+        return view('overall',compact('employees'));
     }
 
     public function overallData(Request $request)
@@ -112,10 +112,10 @@ class OverViewController extends Controller
         ])
         ->options([]);
 
-        $attendees = Attendance::select('employee_id','status')->where('user_id',auth()->id())->get();
+        $employees = Employee::select('name')->where('user_id',auth()->id())->get();
         $name = $request->name;
 
-        return view('overall', compact('linejs','barjs','attendees','name'));
+        return view('overall', compact('linejs','barjs','employees','name'));
     }
 
     private function getStatus($name, $status){

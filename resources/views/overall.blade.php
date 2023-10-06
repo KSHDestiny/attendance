@@ -12,8 +12,8 @@
             <section class="form-group d-flex">
                 <input class="form-control" id="name" list='nameList' name="name" placeholder="Enter Employee Name..." required>
                 <datalist id="nameList">
-                    @foreach ($attendees as $attendee)
-                        <option value="{{ $attendee->employee->name }}"></option>
+                    @foreach ($employees as $employee)
+                        <option value="{{ $employee->name }}"></option>
                     @endforeach
                 </datalist>
                 <button class="btn btn-success">Find</button>
