@@ -13,9 +13,9 @@ class OverViewController extends Controller
 {
     public function index()
     {
-        $onTime = Attendance::select('employee_id','status')->where('status','On time')->where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
-        $absent = Attendance::select('employee_id','status')->where('status','Absent')->where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
-        $late = Attendance::select('employee_id','status')->where('status','Late')->where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
+        $onTime = Attendance::with('employee')->select('employee_id','status')->where('status','On time')->where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
+        $absent = Attendance::with('employee')->select('employee_id','status')->where('status','Absent')->where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
+        $late = Attendance::with('employee')->select('employee_id','status')->where('status','Late')->where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
 
         $piejs = app()->chartjs
                 ->name('pieChartTest')
@@ -59,7 +59,7 @@ class OverViewController extends Controller
             'name' => 'required'
         ]);
 
-        $employeeData = Employee::where('name', $request->name)->get()->count();
+        $employeeData = Employee::where('name', $request->name)->where('user_id',auth()->id())->get()->count();
         if($employeeData == 0){
             Toastr::error("There is no employee named $request->name!", "Error Message", ["closeButton" => true, "progressBar" => true, "positionClass" => "toast-bottom-right"]);
             return back();

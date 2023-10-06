@@ -12,7 +12,7 @@ class AttendanceController extends Controller
 {
     public function attendance()
     {
-        $attendances = Attendance::where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
+        $attendances = Attendance::with('employee')->where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
         $departments = Employee::select('department')->distinct()->get();
         $positions = Employee::select('position')->distinct()->get();
         return view('attendance',compact('attendances','departments','positions'));
