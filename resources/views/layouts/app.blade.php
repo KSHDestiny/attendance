@@ -28,6 +28,8 @@
                 <a class="navbar-brand" href="@auth{{ url('/employee') }}@endauth @guest{{ url('/') }}@endguest">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                <a href="{{ url('lang/mm') }}" class="mx-2"><img src="{{ asset('storage/mm.png') }}" class="img-thumbnail" width="40px" height="40px" alt=""></a>
+                <a href="{{ url('lang/en') }}"><img src="{{ asset('storage/eng.png') }}" class="img-thumbnail" width="40px" height="40px" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -56,17 +58,17 @@
                         @else
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('attendance') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Today Attendance <span class="d-none d-md-inline">|</span>
+                                    {{ __('app.nav-1') }} <span class="d-none d-md-inline">|</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('overview') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Today Overview <span class="d-none d-md-inline">|</span>
+                                    {{ __('app.nav-2') }} <span class="d-none d-md-inline">|</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('overall') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Overall <span class="d-none d-md-inline">|</span>
+                                    {{ __('app.nav-3') }} <span class="d-none d-md-inline">|</span>
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
@@ -78,7 +80,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('app.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

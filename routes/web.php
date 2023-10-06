@@ -4,6 +4,7 @@ use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OverViewController;
 
 /*
@@ -38,4 +39,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/overview',[OverViewController::class,'index'])->name('overview');
     Route::get('/overall',[OverViewController::class,'overall'])->name('overall');
     Route::post('/overall',[OverViewController::class,'overallData'])->name('overall.data');
+
+    Route::get('/lang/{lang}',[LanguageController::class,'translate']);
 });

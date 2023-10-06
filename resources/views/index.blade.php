@@ -3,7 +3,7 @@
 @section('title',"Dashboard")
 
 @section('CR')
-    <a href="{{ route('employee.create') }}" class="text-decoration-none">Create One +</a>
+    <a href="{{ route('employee.create') }}" class="text-decoration-none">{{ __('create.createEmployee') }} +</a>
 @endsection
 
 @section('content')
@@ -14,16 +14,16 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Age</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Department</th>
-                    <th>Location</th>
-                    <th>Position</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>{{ __('create.name') }}</th>
+                    <th>{{ __('create.email') }}</th>
+                    <th>{{ __('create.age') }}</th>
+                    <th>{{ __('create.phone') }}</th>
+                    <th>{{ __('create.address') }}</th>
+                    <th>{{ __('create.department') }}</th>
+                    <th>{{ __('create.location') }}</th>
+                    <th>{{ __('create.position') }}</th>
+                    <th>{{ __('create.edit') }}</th>
+                    <th>{{ __('create.delete') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,10 +39,10 @@
                         <td>{{ $employee->location }}</td>
                         <td>{{ $employee->position }}</td>
                         <td>
-                            <a href="{{ route('employee.edit',$employee->id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('employee.edit',$employee->id) }}" class="btn btn-warning">{{ __('create.edit') }}</a>
                         </td>
                         <td>
-                            <a href="javascript:;" class="btn btn-danger" onclick="destroy({{ $employee->id }})">Delete</a>
+                            <a href="javascript:;" class="btn btn-danger" onclick="destroy({{ $employee->id }})">{{ __('create.delete') }}</a>
                         </td>
                     </tr>
                 @empty
@@ -60,13 +60,14 @@
 
 function destroy(id){
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: '{{ __('create.areYouSure') }}',
+        text: "{{ __('create.cantRevert') }}",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: '{{ __('create.yes') }}',
+        cancelButtonText: '{{ __('create.no') }}',
     }).then((result) => {
         if (result.isConfirmed) {
             let route = "{{ route('employee.destroy',':id') }}";
