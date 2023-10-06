@@ -233,6 +233,48 @@
                                 <td class=${statusClass}>${attendance.status}</td>
                                 ${tableColumn}
                             </tr>
+
+                            <article class="modal fade" id="staticBackdrop${attendance.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <section class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel${attendance.id}">Edit Attendance</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </section>
+                                        <section class="modal-body">
+                                            <form action=${route} method="POST">
+                                                ${csrf}
+                                                <input type="hidden" name="id" value="${attendance.id}">
+                                                <input type="hidden" name="name" value="${attendance.name}">
+                                                <div class="my-2">
+                                                    <label for="status">Status</label>
+                                                    <select name="status" id="status" class="form-select">
+                                                        <option value="On time" ${onTimeSelected}>On time</option>
+                                                        <option value="Absent" ${absentSelected}>Absent</option>
+                                                        <option value="Late" ${lateSelected}>Late</option>
+                                                    </select>
+                                                </div>
+                                                <div class="my-2">
+                                                    <label for="start">Start</label>
+                                                    <input type="time" name="start" id="start" value=${attendance.start} class="form-control">
+                                                </div>
+                                                <div class="my-2">
+                                                    <label for="break">Break</label>
+                                                    <input type="text" name="break" id="break" pattern="[0-9]{2}:[0-59]{2}" value=${attendance.break} placeholder="01:00" class="form-control">
+                                                </div>
+                                                <div class="my-2">
+                                                    <label for="finish">Finish</label>
+                                                    <input type="time" name="finish" id="finish" value=${attendance.finish} class="form-control">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </form>
+                                        </section>
+                                    </div>
+                                </div>
+                            </article>
                             `;
                         })
                         $("#attendanceStatus").html(status);
