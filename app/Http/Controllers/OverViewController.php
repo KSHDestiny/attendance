@@ -17,32 +17,9 @@ class OverViewController extends Controller
         $absent = Attendance::with('employee')->select('employee_id','status')->where('status','Absent')->where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
         $late = Attendance::with('employee')->select('employee_id','status')->where('status','Late')->where('user_id',auth()->id())->whereDate('date', Carbon::today())->get();
 
-        $piejs = app()->chartjs
-                ->name('pieChartTest')
-                ->type('pie')
-                ->size(['width' => 400, 'height' => 200])
-                ->labels(['On Time', 'Late', 'Absent'])
-                ->datasets([
-                    [
-                        'backgroundColor' => ['green', 'orange', 'red'],
-                        'hoverBackgroundColor' => ['darkgreen', 'darkorange', 'darkred'],
-                        'data' => [$onTime->count(), $late->count(), $absent->count()]
-                    ]
-                ])->options([]);
-
-        $barjs = app()->chartjs
-                ->name('barChartTest')
-                ->type('bar')
-                ->size(['width' => 400, 'height' => 200])
-                ->labels(['On Time', 'Late', 'Absent'])
-                ->datasets([
-                    [
-                        "label" => "Today Attendance",
-                        'backgroundColor' => ['green', 'orange', 'red'],
-                        'hoverBackgroundColor' => ['darkgreen', 'darkorange', 'darkred'],
-                        'data' => [$onTime->count(), $late->count(), $absent->count()]
-                    ]
-                ])->options([]);
+        // * ChartJs
+        $piejs = $this->chartjs("pie", ['On Time', 'Late', "Absent"], null, ['green', 'orange', 'red'], ['darkgreen', 'darkorange', 'darkred'], null,  null, null, [$onTime->count(), $late->count(), $absent->count()]);
+        $barjs = $this->chartjs("bar", ['On Time', 'Late', "Absent"], null, ['green', 'orange', 'red'], ['darkgreen', 'darkorange', 'darkred'], null,  null, null, [$onTime->count(), $late->count(), $absent->count()]);
 
         return view('overview',compact('onTime','absent','late','piejs','barjs'));
     }
@@ -59,12 +36,14 @@ class OverViewController extends Controller
             'name' => 'required'
         ]);
 
+        // * Wrong Name
         $employeeData = Employee::where('name', $request->name)->where('user_id',auth()->id())->get()->count();
         if($employeeData == 0){
             Toastr::error("There is no employee named $request->name!", "Error Message", ["closeButton" => true, "progressBar" => true, "positionClass" => "toast-bottom-right"]);
             return back();
         }
 
+        // * ChartJs Data
         $onTime = $this->getStatus($request->name, "On time");
         $late = $this->getStatus($request->name, "Late");
         $absent = $this->getStatus($request->name, "Absent");
@@ -74,43 +53,9 @@ class OverViewController extends Controller
         $latePer = ($late / $totalDay) * 100;
         $absentPer = ($absent / $totalDay) * 100;
 
-        $linejs = app()->chartjs
-        ->name('lineChartTest')
-        ->type('line')
-        ->size(['width' => 400, 'height' => 200])
-        ->labels(['On Time', 'Late', "Absent"])
-        ->datasets([
-            [
-                "label" => $request->name."'s Attendance",
-                'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [$onTimePer, $latePer, $absentPer],
-            ],
-        ])
-        ->options([]);
-
-        $barjs = app()->chartjs
-        ->name('barChartTest')
-        ->type('bar')
-        ->size(['width' => 400, 'height' => 200])
-        ->labels(['On Time', 'Late', "Absent"])
-        ->datasets([
-            [
-                "label" => $request->name."'s Attendance",
-                'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [$onTime, $late, $absent],
-            ],
-        ])
-        ->options([]);
+        // * ChartJs
+        $linejs = $this->chartjs("line", ['On Time', 'Late', "Absent"], $request->name, "rgba(38, 185, 154, 0.31)", null, "rgba(38, 185, 154, 0.7)",  "#fff", "rgba(220,220,220,1)", [$onTimePer, $latePer, $absentPer] );
+        $barjs = $this->chartjs("bar", ['On Time', 'Late', "Absent"], $request->name, "rgba(38, 185, 154, 0.31)", null, "rgba(38, 185, 154, 0.7)",  "#fff", "rgba(220,220,220,1)", [$onTime, $late, $absent] );
 
         $employees = Employee::select('name')->where('user_id',auth()->id())->get();
         $name = $request->name;
@@ -126,5 +71,27 @@ class OverViewController extends Controller
         ->where('status',$status)
         ->get()
         ->count();
+    }
+
+    private function chartjs($type, $labels, $name = "Today", $bgColor, $hoverBgColor, $pointColor, $pointBgColor, $pointBorderColor, $data){
+        return app()->chartjs
+        ->name($type.'ChartTest')
+        ->type($type)
+        ->size(['width' => 400, 'height' => 200])
+        ->labels($labels)
+        ->datasets([
+            [
+                "label" => $name."'s Attendance",
+                'backgroundColor' => $bgColor,
+                'hoverBackgroundColor' => $hoverBgColor,
+                'borderColor' => $pointColor,
+                "pointBorderColor" => $pointColor,
+                "pointBackgroundColor" => $pointColor,
+                "pointHoverBackgroundColor" => $pointBgColor,
+                "pointHoverBorderColor" =>  $pointBorderColor,
+                'data' => $data,
+            ],
+        ])
+        ->options([]);
     }
 }
