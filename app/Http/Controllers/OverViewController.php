@@ -39,7 +39,8 @@ class OverViewController extends Controller
         // * Wrong Name
         $employeeData = Employee::where('name', $request->name)->where('user_id',auth()->id())->get()->count();
         if($employeeData == 0){
-            Toastr::error("There is no employee named $request->name!", "Error Message", ["closeButton" => true, "progressBar" => true, "positionClass" => "toast-bottom-right"]);
+            $name = htmlentities($request->name);
+            Toastr::error("There is no employee named $name!", "Error Message", ["closeButton" => true, "progressBar" => true, "positionClass" => "toast-bottom-right"]);
             return back();
         }
 

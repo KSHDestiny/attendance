@@ -79,7 +79,8 @@ class AttendanceController extends Controller
         }
         $attendance->save();
 
-        Toastr::success("You have edited {$request->name} data!", "Success Message", ["closeButton" => true, "progressBar" => true, "positionClass" => "toast-bottom-right"]);
+        $name = htmlentities($request->name);
+        Toastr::success("You have edited $name data!", "Success Message", ["closeButton" => true, "progressBar" => true, "positionClass" => "toast-bottom-right"]);
         return redirect()->route('attendance');
     }
 

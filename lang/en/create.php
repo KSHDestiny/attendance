@@ -5,7 +5,7 @@
         "back" => "Back",
         "name" => "Name",
         "email" => "Email",
-        "age" => "Phone",
+        "age" => "Age",
         "phone" => "Phone",
         "address" => "Address",
         "department" => "Department",
